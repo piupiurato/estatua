@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estátua Virtual do Amor 💖</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffe6f0;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    position: relative;
+  }
+
+  h1 {
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    text-align: center;
+    color: #d6336c;
+  }
+
+  .statue {
+    width: 200px;
+    height: 300px;
+    background: url('19.jpg') no-repeat center/cover; /* substitui com tua imagem */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .statue:hover {
+    transform: scale(1.1);
+  }
+
+  .heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    transform: rotate(-45deg);
+    border-radius: 50%;
+    opacity: 0.8;
+    pointer-events: none;
+    animation: floatUp 5s linear infinite;
+  }
+
+  .heart::before,
+  .heart::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+  }
+  .heart::before { top: -10px; left: 0; }
+  .heart::after { left: 10px; top: 0; }
+
+  @keyframes floatUp {
+    0% { transform: translateY(0) rotate(-45deg); opacity: 1; }
+    100% { transform: translateY(-600px) rotate(-45deg); opacity: 0; }
+  }
+
+  #message {
+    position: absolute;
+    bottom: 50px;
+    font-size: 1.5em;
+    color: #d6336c;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<h1>Estátua Virtual do Amor 💖</h1>
+
+<div class="statue" id="statue"></div>
+<div id="message"></div>
+
+<script>
+const statue = document.getElementById('statue');
+const message = document.getElementById('message');
+
+// Função para criar corações aleatórios
+function createHeart() {
+  const heart = document.createElement('div');
+  heart.classList.add('heart');
+  heart.style.left = Math.random() * window.innerWidth + 'px';
+  heart.style.width = 10 + Math.random() * 20 + 'px';
+  heart.style.height = heart.style.width;
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 5000);
+}
+
+// Gerar corações a cada 300ms
+setInterval(createHeart, 300);
+
+// Mensagem ao clicar na estátua
+statue.addEventListener('click', () => {
+  message.innerText = '💖 Este é o símbolo do nosso amor eterno! 💖';
+  statue.style.transform = 'scale(1.2)';
+  setTimeout(() => { statue.style.transform = 'scale(1)'; }, 500);
+});
+</script>
+
+</body>
+</html>
